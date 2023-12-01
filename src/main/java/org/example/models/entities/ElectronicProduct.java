@@ -2,7 +2,9 @@ package org.example.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.Date;
+
+import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -11,12 +13,21 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
+@Table(name = "Electronics")
 public class ElectronicProduct {
-
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "brand")
     private String brand;
+    @Column(name = "model")
     private String model;
+    @Column(name = "price")
     private double price;
+    @Column(name = "weight")
     private int weight;
+    @Column(name = "date_of_manufacture")
     private Date dateOfManufacture;
+    @ManyToMany(mappedBy = "electronicProducts")
+    private Set<Client> clients;
 }
