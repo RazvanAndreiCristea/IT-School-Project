@@ -1,4 +1,4 @@
-package org.example.models.service;
+package org.example.service;
 
 import org.example.models.dtos.clientDTO.CreateClientDTO;
 import org.example.models.dtos.clientDTO.ResponseClientDTO;

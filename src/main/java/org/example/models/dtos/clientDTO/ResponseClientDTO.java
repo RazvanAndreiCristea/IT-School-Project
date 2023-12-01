@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.example.models.entities.ElectronicProduct;
 import org.example.models.entities.Order;
-
 import java.util.List;
 import java.util.Set;
 

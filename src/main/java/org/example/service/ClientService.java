@@ -1,13 +1,12 @@
-package org.example.models.service;
+package org.example.service;
 
 import org.example.models.dtos.clientDTO.*;
 import org.example.models.entities.Client;
-import org.example.models.repository.ClientRepository;
+import org.example.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ClientService {
-
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
 
@@ -19,6 +18,11 @@ public class ClientService {
     public ResponseClientDTO createClient(CreateClientDTO clientDTO) {
         Client client = clientMapper.mapClientDTOToClient(clientDTO);
         clientRepository.save(client);
+        return clientMapper.mapClientToResponseClientDTO(client);
+    }
+
+    public ResponseClientDTO getClient(Long id) {
+        Client client = clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Client not found"));
         return clientMapper.mapClientToResponseClientDTO(client);
     }
 }

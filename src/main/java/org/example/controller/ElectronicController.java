@@ -1,4 +1,4 @@
-package org.example.models.controller;
+package org.example.controller;
 
 public class ElectronicController {
 }
