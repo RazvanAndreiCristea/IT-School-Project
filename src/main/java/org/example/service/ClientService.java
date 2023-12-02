@@ -3,6 +3,8 @@ package org.example.service;
 import org.example.models.dtos.clientDTO.*;
 import org.example.models.entities.Client;
 import org.example.repository.ClientRepository;
+import org.example.service.mappers.ClientMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,7 @@ public class ClientService {
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
 
+    @Autowired
     public ClientService(ClientRepository clientRepository, ClientMapper clientMapper) {
         this.clientRepository = clientRepository;
         this.clientMapper = clientMapper;

@@ -57,6 +57,13 @@ public class ClientController {
 
         List<ResponseClientDTO> responseClientDTOList = clientService.getClientsByFirstNameOrLastName(firstName, lastName);
         CustomResponseDTO customResponseDTO = new CustomResponseDTO();
+
+        if (responseClientDTOList.isEmpty()) {
+            customResponseDTO.setResponseObject(null);
+            customResponseDTO.setResponseMessage("No clients found");
+            return new ResponseEntity<>(customResponseDTO, HttpStatus.NOT_FOUND);
+        }
+
         customResponseDTO.setResponseObject(responseClientDTOList);
         customResponseDTO.setResponseMessage("Clients retrieved successfully");
         return new ResponseEntity<>(customResponseDTO, HttpStatus.OK);
