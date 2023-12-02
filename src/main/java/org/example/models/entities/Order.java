@@ -1,5 +1,6 @@
 package org.example.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,10 +17,17 @@ public class Order {
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
+    @JsonBackReference
     private Client client;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "electronic_product_id")
     private ElectronicProduct electronicProduct;
     @Column(name = "total_price")
     private double totalPrice;
+
+    public Order(Client client, ElectronicProduct electronicProduct, double totalPrice) {
+        this.client = client;
+        this.electronicProduct = electronicProduct;
+        this.totalPrice = totalPrice;
+    }
 }
