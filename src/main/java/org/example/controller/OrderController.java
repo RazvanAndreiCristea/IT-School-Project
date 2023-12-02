@@ -2,10 +2,7 @@ package org.example.controller;
 
 import jakarta.validation.Valid;
 import org.example.models.dtos.CustomResponseDTO;
-import org.example.models.dtos.electronicsDTO.CreateElectronicProductDTO;
 import org.example.models.dtos.orderDTO.CreateOrderDTO;
-import org.example.repository.ClientRepository;
-import org.example.repository.ElectronicRepository;
 import org.example.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,18 +27,18 @@ public class OrderController {
     @PostMapping("/create/order")
     public ResponseEntity<CustomResponseDTO> createOrder(@RequestBody @Valid CreateOrderDTO createOrderDTO, BindingResult bindingResult) {
 
-            CustomResponseDTO customResponseDTO = new CustomResponseDTO();
+        CustomResponseDTO customResponseDTO = new CustomResponseDTO();
 
-            if (bindingResult.hasErrors()) {
-                String errorMessage = bindingResult.getFieldErrors().get(0).getDefaultMessage();
-                customResponseDTO.setResponseObject(null);
-                customResponseDTO.setResponseMessage(errorMessage);
-                return new ResponseEntity<>(customResponseDTO, HttpStatus.BAD_REQUEST);
-            }
+        if (bindingResult.hasErrors()) {
+            String errorMessage = bindingResult.getFieldErrors().get(0).getDefaultMessage();
+            customResponseDTO.setResponseObject(null);
+            customResponseDTO.setResponseMessage(errorMessage);
+            return new ResponseEntity<>(customResponseDTO, HttpStatus.BAD_REQUEST);
+        }
 
-            customResponseDTO.setResponseObject(orderService.createOrder(createOrderDTO));
-            customResponseDTO.setResponseMessage("Order created successfully");
+        customResponseDTO.setResponseObject(orderService.createOrder(createOrderDTO));
+        customResponseDTO.setResponseMessage("Order created successfully");
 
-            return new ResponseEntity<>(customResponseDTO, HttpStatus.CREATED);
+        return new ResponseEntity<>(customResponseDTO, HttpStatus.CREATED);
     }
 }
